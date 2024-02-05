@@ -1,14 +1,43 @@
+ let loading = false;
+  let page = 1;
 
-function fn(){
-	const element = document.getElementById("infi-list");
-let y = element.scrollHeight;
-	if(y === 700){
-	let li1 = document.createElement("li");
-	li.createTextNode("Item 11");
-		let li2 = document.createElement("li");
-	li2.createTextNode("Item 12");
-		element.appendChild(li1);
-		element.appendChild(li2);
-	}
-}
+  function fetchData() {
+    // Simulating fetching data from an API
+    const newData = Array.from({ length: 5 }, (_, index) => `<div class="item">New Item ${index + 1}</div>`);
+    return Promise.resolve(newData);
+  }
 
+  function appendDataToContent(data) {
+    const content = document.getElementById('infi-list');
+    data.forEach(item => {
+      content.insertAdjacentHTML('beforeend', item);
+    });
+  }
+
+  function handleScroll() {
+    const content = document.getElementById('content');
+    const scrollPosition = content.scrollTop + content.clientHeight;
+    const totalHeight = content.scrollHeight;
+
+    if (scrollPosition >= totalHeight * 0.9 && !loading) {
+      loading = true;
+
+      fetchData()
+        .then(newData => {
+          appendDataToContent(newData);
+          loading = false;
+          page++;
+        })
+        .catch(error => {
+          console.error('Error fetching data:', error);
+          loading = false;
+        });
+    }
+  }
+
+  // Add a scroll event listener to trigger infinite scroll
+  const content = document.getElementById('infi-list');
+  content.addEventListener('scroll', handleScroll);
+
+  // Initial data load
+  handleScroll();
