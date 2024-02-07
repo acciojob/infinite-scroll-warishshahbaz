@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   // Add 10 list items by default
-  addListItems(10);
+  // addListItems(10);
 
   // Function to check if the user has reached the end of the list
   function isEndOfList() {
