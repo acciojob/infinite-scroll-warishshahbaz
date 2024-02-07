@@ -1,12 +1,13 @@
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', function() {
   const list = document.querySelector('.list');
 
   // Function to add list items
   function addListItems(count) {
     for (let i = 0; i < count; i++) {
-      const li = document.createElement('li');
-      li.textContent = `List item ${i + 1}`;
-      list.appendChild(li);
+      const listItem = document.createElement('li');
+      listItem.classList.add('list-item');
+      listItem.textContent = `List item ${i + 1}`;
+      list.appendChild(listItem);
     }
   }
 
