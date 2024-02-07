@@ -1,21 +1,16 @@
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-}
+.infi-list {
+  width: 200px;
+  height: 300px;
+  overflow: auto;
 
-.container {
-  max-width: 600px;
-  margin: 50px auto;
+  margin: 30px;
+  padding: 20px;
+  border: 10px solid black;
 }
-
-.list {
-  list-style: none;
-  padding: 0;
-}
-
-.list-item {
-  background-color: #f0f0f0;
-  border: 1px solid #ccc;
-  margin-bottom: 10px;
+li {
   padding: 10px;
+  list-style-type: none;
+}
+li:hover {
+  background: #ccc;
 }

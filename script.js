@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
-  const list = document.querySelector('.list');
+  const list = document.querySelector('.infi-list');
 
   // Function to add list items
   function addListItems(count) {
