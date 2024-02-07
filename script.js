@@ -1,43 +1,33 @@
- let loading = false;
-  let page = 1;
+document.addEventListener('DOMContentLoaded', () => {
+  const list = document.querySelector('.list');
 
-  function fetchData() {
-    // Simulating fetching data from an API
-    const newData = Array.from({ length: 5 }, (_, index) => `<div class="item">New Item ${index + 1}</div>`);
-    return Promise.resolve(newData);
-  }
-
-  function appendDataToContent(data) {
-    const content = document.getElementById('infi-list');
-    data.forEach(item => {
-      content.insertAdjacentHTML('beforeend', item);
-    });
-  }
-
-  function handleScroll() {
-    const content = document.getElementById('content');
-    const scrollPosition = content.scrollTop + content.clientHeight;
-    const totalHeight = content.scrollHeight;
-
-    if (scrollPosition >= totalHeight * 0.9 && !loading) {
-      loading = true;
-
-      fetchData()
-        .then(newData => {
-          appendDataToContent(newData);
-          loading = false;
-          page++;
-        })
-        .catch(error => {
-          console.error('Error fetching data:', error);
-          loading = false;
-        });
+  // Function to add list items
+  function addListItems(count) {
+    for (let i = 0; i < count; i++) {
+      const li = document.createElement('li');
+      li.textContent = `List item ${i + 1}`;
+      list.appendChild(li);
     }
   }
 
-  // Add a scroll event listener to trigger infinite scroll
-  const content = document.getElementById('infi-list');
-  content.addEventListener('scroll', handleScroll);
+  // Add 10 list items by default
+  addListItems(10);
 
-  // Initial data load
-  handleScroll();
+  // Function to check if the user has reached the end of the list
+  function isEndOfList() {
+    const lastItem = list.lastElementChild;
+    const lastItemRect = lastItem.getBoundingClientRect();
+    return lastItemRect.bottom <= window.innerHeight;
+  }
+
+  // Function to handle scroll event
+  function handleScroll() {
+    if (isEndOfList()) {
+      // Add 2 more list items when user reaches end of list
+      addListItems(2);
+    }
+  }
+
+  // Add scroll event listener to window
+  window.addEventListener('scroll', handleScroll);
+});
