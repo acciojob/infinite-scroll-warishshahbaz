@@ -19,9 +19,9 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   // Initially add 10 list items
-  for (let i = 0; i < 10; i++) {
-    const newItem = document.createElement("li");
-    newItem.textContent = `Item ${i + 1}`;
-    list.appendChild(newItem);
-  }
+  // for (let i = 0; i < 10; i++) {
+  //   const newItem = document.createElement("li");
+  //   newItem.textContent = `Item ${i + 1}`;
+  //   list.appendChild(newItem);
+  // }
 });
