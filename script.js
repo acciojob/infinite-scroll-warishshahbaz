@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
-  const list = document.querySelector(".infi-list");
+  const list = document.querySelector("#infi-list");
   const listItemHeight = list.firstElementChild.offsetHeight;
 
   // Function to add more list items
