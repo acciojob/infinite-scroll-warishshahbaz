@@ -1,34 +1,27 @@
-document.addEventListener('DOMContentLoaded', function() {
-  const list = document.querySelector('.infi-list');
+document.addEventListener("DOMContentLoaded", function () {
+  const list = document.querySelector(".infi-list");
+  const listItemHeight = list.firstElementChild.offsetHeight;
 
-  // Function to add list items
-  function addListItems(count) {
-    for (let i = 0; i < count; i++) {
-      const listItem = document.createElement('li');
-      listItem.classList.add('list-item');
-      listItem.textContent = `List item ${i + 1}`;
-      list.appendChild(listItem);
+  // Function to add more list items
+  function addMoreItems() {
+    for (let i = 0; i < 2; i++) {
+      const newItem = document.createElement("li");
+      newItem.textContent = `Item ${list.children.length + 1}`;
+      list.appendChild(newItem);
     }
   }
 
-  // Add 10 list items by default
-  // addListItems(10);
-
-  // Function to check if the user has reached the end of the list
-  function isEndOfList() {
-    const lastItem = list.lastElementChild;
-    const lastItemRect = lastItem.getBoundingClientRect();
-    return lastItemRect.bottom <= window.innerHeight;
-  }
-
-  // Function to handle scroll event
-  function handleScroll() {
-    if (isEndOfList()) {
-      // Add 2 more list items when user reaches end of list
-      addListItems(2);
+  // Event listener for scroll
+  list.addEventListener("scroll", function () {
+    if (list.scrollTop + list.clientHeight >= list.scrollHeight) {
+      addMoreItems();
     }
-  }
+  });
 
-  // Add scroll event listener to window
-  window.addEventListener('scroll', handleScroll);
+  // Initially add 10 list items
+  for (let i = 0; i < 10; i++) {
+    const newItem = document.createElement("li");
+    newItem.textContent = `Item ${i + 1}`;
+    list.appendChild(newItem);
+  }
 });
